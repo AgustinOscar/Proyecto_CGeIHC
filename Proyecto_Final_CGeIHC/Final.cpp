@@ -281,6 +281,9 @@ int main()
 	Model muro("resources/objects/Muro/Muro.obj");
 	Model casa8("resources/objects/Casa8/casa8.obj");
 	Model lampara("resources/objects/Lampara/Lampara.obj");
+	Model pozo("resources/objects/pozo/pozo.obj");
+	Model fuente2("resources/objects/fuente2/fuente2.obj");
+	Model cementerio("resources/objects/cementerio/cementerio.obj");
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -320,7 +323,7 @@ int main()
 		//Setup Advanced Lights
 		staticShader.setVec3("viewPos", camera.Position);
 		staticShader.setVec3("dirLight.direction", lightDirection);
-		staticShader.setVec3("dirLight.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
+		staticShader.setVec3("dirLight.ambient", glm::vec3(0.9f, 0.8f, 0.7f));
 		staticShader.setVec3("dirLight.diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
 
@@ -593,13 +596,13 @@ int main()
 		staticShader.setMat4("model", model);
 		iglesia.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(170.0f, -5.0f, 40.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(160.0f, -5.0f, 40.0f));
 		model = glm::rotate(model, glm::radians(95.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
 		puesto1.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(190.0f, -5.0f, 80.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(180.0f, -5.0f, 80.0f));
 		model = glm::rotate(model, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
@@ -609,9 +612,9 @@ int main()
 		model = glm::rotate(model, glm::radians(150.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
-		puesto1.Draw(staticShader);
+		//puesto1.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(190.0f, -5.0f, 120.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(180.0f, -5.0f, 120.0f));
 		model = glm::rotate(model, glm::radians(60.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
@@ -622,21 +625,21 @@ int main()
 		model = glm::rotate(model, glm::radians(150.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
-		puesto1.Draw(staticShader);
+		//puesto1.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-190.0f, -5.0f, 50.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-180.0f, -5.0f, 50.0f));
 		model = glm::rotate(model, glm::radians(200.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
 		puesto1.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-190.0f, -5.0f, 95.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-180.0f, -5.0f, 95.0f));
 		model = glm::rotate(model, glm::radians(240.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
 		puesto1.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-190.0f, -5.0f, 140.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-180.0f, -5.0f, 140.0f));
 		model = glm::rotate(model, glm::radians(240.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.8f));
 		staticShader.setMat4("model", model);
@@ -805,19 +808,31 @@ int main()
 		staticShader.setMat4("model", model);
 		base6.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 18.0f, 120.0f));
-		//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(170.0f, 18.0f, -170.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.2f));
 		staticShader.setMat4("model", model);
 		estatua.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.5f, 120.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-170.0f, 18.0f, -170.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f));
+		staticShader.setMat4("model", model);
+		estatua.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-170.0f, -2.5f, -170.0f));
 		//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
 		jardinera.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 180.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(170.0f, -2.5f, -170.0f));
+		//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f));
+		staticShader.setMat4("model", model);
+		jardinera.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 175.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
@@ -990,6 +1005,78 @@ int main()
 		staticShader.setMat4("model", model);
 		lampara.Draw(staticShader);
 
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(430.0f, -5.0f, 145.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
+		staticShader.setMat4("model", model);
+		pozo.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(430.0f, -5.0f, -30.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
+		staticShader.setMat4("model", model);
+		pozo.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-430.0f, -5.0f, 230.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
+		staticShader.setMat4("model", model);
+		pozo.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-430.0f, -5.0f, -135.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
+		staticShader.setMat4("model", model);
+		pozo.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(50.0f, -5.0f, -450.0f));
+		model = glm::scale(model, glm::vec3(7.0f));
+		staticShader.setMat4("model", model);
+		pozo.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 135.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		fuente2.Draw(staticShader);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, -135.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(3.0f));
+		staticShader.setMat4("model", model);
+		cementerio.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(75.0f, -8.0f, -119.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		muro.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(75.0f, -8.0f, -160.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		muro.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(75.0f, -8.0f, -119.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		muro.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-75.0f, -8.0f, -160.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		muro.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-75.0f, -8.0f, -119.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(5.0f));
+		staticShader.setMat4("model", model);
+		muro.Draw(staticShader);
 		
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Caja Transparente --- Siguiente Práctica
