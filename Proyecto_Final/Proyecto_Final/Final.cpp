@@ -344,7 +344,7 @@ int main()
 		//Setup Advanced Lights
 		staticShader.setVec3("viewPos", camera.Position);
 		staticShader.setVec3("dirLight.direction", lightDirection);
-		staticShader.setVec3("dirLight.ambient", glm::vec3(1.0f, 1.0f, 1.0f));
+		staticShader.setVec3("dirLight.ambient", glm::vec3(0.9f, 0.8f, 0.6f));
 		staticShader.setVec3("dirLight.diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
 		staticShader.setVec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
 
