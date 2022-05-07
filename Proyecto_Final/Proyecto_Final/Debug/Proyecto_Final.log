@@ -2,13 +2,13 @@
 C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
 C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1337,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1338,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1342,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1343,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1345,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1346,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1354,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1357,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1358,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1362,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1363,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1365,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1366,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1374,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
   glad.c
 glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'C:\Users\Agustin\Documents\Proyecto_CGeIHC\Proyecto_CGeIHC\Proyecto_Final\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

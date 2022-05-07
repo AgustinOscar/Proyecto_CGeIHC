@@ -265,18 +265,18 @@ int main()
 	// load models
 	// -----------
 	Model piso("resources/objects/piso/piso.obj");
-	Model botaDer("resources/objects/Personaje/bota.obj");
-	Model piernaDer("resources/objects/Personaje/piernader.obj");
-	Model piernaIzq("resources/objects/Personaje/piernader.obj");
-	Model torso("resources/objects/Personaje/torso.obj");
-	Model brazoDer("resources/objects/Personaje/brazoder.obj");
-	Model brazoIzq("resources/objects/Personaje/brazoizq.obj");
-	Model cabeza("resources/objects/Personaje/cabeza.obj");
-	Model carro("resources/objects/lambo/carroceria.obj");
-	Model llanta("resources/objects/lambo/Wheel.obj");
-	Model casaVieja("resources/objects/casa/OldHouse.obj");
+	//Model botaDer("resources/objects/Personaje/bota.obj");
+	//Model piernaDer("resources/objects/Personaje/piernader.obj");
+	//Model piernaIzq("resources/objects/Personaje/piernader.obj");
+	//Model torso("resources/objects/Personaje/torso.obj");
+	//Model brazoDer("resources/objects/Personaje/brazoder.obj");
+	//Model brazoIzq("resources/objects/Personaje/brazoizq.obj");
+	//Model cabeza("resources/objects/Personaje/cabeza.obj");
+	//Model carro("resources/objects/lambo/carroceria.obj");
+	//Model llanta("resources/objects/lambo/Wheel.obj");
+	//Model casaVieja("resources/objects/casa/OldHouse.obj");
 	//Model cubo("resources/objects/cubo/cube02.obj");
-	Model casaDoll("resources/objects/casa/DollHouse.obj");
+	//Model casaDoll("resources/objects/casa/DollHouse.obj");
 
 	//Modelos del proyecto final//
 	Model pisoCatedral("resources/objects/Piso_Catedral/Piso_Catedral_1.obj");
@@ -300,11 +300,11 @@ int main()
 	Model fuente2("resources/objects/fuente2/fuente2.obj");
 	Model cementerio("resources/objects/cementerio/cementerio.obj");
 
-	ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
-	animacionPersonaje.initShaders(animShader.ID);
+	//ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
+	//animacionPersonaje.initShaders(animShader.ID);
 
-	ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
-	ninja.initShaders(animShader.ID);
+	//ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
+	//ninja.initShaders(animShader.ID);
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -400,7 +400,7 @@ int main()
 		model = glm::scale(model, glm::vec3(1.2f));	// it's a bit too big for our scene, so scale it down
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		animShader.setMat4("model", model);
-		animacionPersonaje.Draw(animShader);
+		//animacionPersonaje.Draw(animShader);
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Segundo Personaje Animacion
@@ -410,7 +410,7 @@ int main()
 		model = glm::scale(model, glm::vec3(0.5f));	// it's a bit too big for our scene, so scale it down
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		animShader.setMat4("model", model);
-		ninja.Draw(animShader);
+		//ninja.Draw(animShader);
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Escenario
@@ -422,7 +422,7 @@ int main()
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		casaDoll.Draw(staticShader);
+		//casaDoll.Draw(staticShader);
 
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -5.2f, 0.0f));
@@ -433,180 +433,30 @@ int main()
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -70.0f));
 		model = glm::scale(model, glm::vec3(5.0f));
 		staticShader.setMat4("model", model);
-		casaVieja.Draw(staticShader);
+		//casaVieja.Draw(staticShader);
 
-		model = glm::translate(model, glm::vec3(70.0f, -2.0f, -70.0f));
+		model = glm::translate(model, glm::vec3(100.0f, -2.0f, -90.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
 
-		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 5.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 5.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, -2.5f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, -2.5f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(5.0f, 0.0f, -4.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(4.0f, 0.0f, 6.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(6.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(6.0f, 0.0f, 2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(6.0f, 0.0f, 2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(6.0f, 0.0f, 2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(6.0f, 0.0f, 2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 4.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, 2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-80.0f, 0.0f, -2.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 6.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -12.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -4.0f));
+		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 10.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
 
 
-		model = glm::translate(model, glm::vec3(8.0f, 0.0f, 4.0f));
+		model = glm::translate(model, glm::vec3(7.0f, 0.0f, 5.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
 
-		model = glm::translate(model, glm::vec3(-16.0f, 0.0f, 4.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		//arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, 4.0f));
+		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 10.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
 
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 6.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -6.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -6.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -6.0f));
-		model = glm::scale(model, glm::vec3(1.0f));
-		staticShader.setMat4("model", model);
-		arbol2.Draw(staticShader);
-
-		model = glm::translate(model, glm::vec3(8.0f, 0.0f, -2.0f));
+		model = glm::translate(model, glm::vec3(-20.0f, 0.0f, -30.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
@@ -616,12 +466,182 @@ int main()
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
 
-		model = glm::translate(model, glm::vec3(8.0f, 0.0f, 10.0f));
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 8.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
 
-		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, -2.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 5.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-3.0f, 0.0f, -6.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(6.0f, 0.0f, -6.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(2.0f, 0.0f, -6.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(20.0f, 0.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 8.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-6.0f, 0.0f, 6.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(30.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(4.0f, 0.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-220.0f, 0.0f, -10.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 15.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, -2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, 2.0f));
+		model = glm::scale(model, glm::vec3(1.0f));
+		staticShader.setMat4("model", model);
+		//arbol2.Draw(staticShader);
+
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, -2.0f));
 		model = glm::scale(model, glm::vec3(1.0f));
 		staticShader.setMat4("model", model);
 		arbol2.Draw(staticShader);
@@ -879,25 +899,25 @@ int main()
 		staticShader.setMat4("model", model);
 		jardinera.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 175.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, -2.5f, 175.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
 		jardinera2.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 70.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, -2.5f, 70.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
 		jardinera2.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(80.0f, 0.0f, 70.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(80.0f, -2.5f, 70.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
 		jardinera2.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(80.0f, 0.0f, 180.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(80.0f, -2.5f, 180.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.5f));
 		staticShader.setMat4("model", model);
@@ -1133,29 +1153,29 @@ int main()
 		tmp = model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		staticShader.setMat4("model", model);
-		carro.Draw(staticShader);
+		//carro.Draw(staticShader);
 
 		model = glm::translate(tmp, glm::vec3(8.5f, 2.5f, 12.9f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Izq delantera
+		//llanta.Draw(staticShader);	//Izq delantera
 
 		model = glm::translate(tmp, glm::vec3(-8.5f, 2.5f, 12.9f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Der delantera
+		//llanta.Draw(staticShader);	//Der delantera
 
 		model = glm::translate(tmp, glm::vec3(-8.5f, 2.5f, -14.5f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Der trasera
+		//llanta.Draw(staticShader);	//Der trasera
 
 		model = glm::translate(tmp, glm::vec3(8.5f, 2.5f, -14.5f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Izq trase
+		//llanta.Draw(staticShader);	//Izq trase
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Personaje
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -1163,51 +1183,51 @@ int main()
 		model = glm::translate(model, glm::vec3(posX, posY, posZ));
 		tmp = model = glm::rotate(model, glm::radians(giroMonito), glm::vec3(0.0f, 1.0f, 0.0));
 		staticShader.setMat4("model", model);
-		torso.Draw(staticShader);
+		//torso.Draw(staticShader);
 
 		//Pierna Der
 		model = glm::translate(tmp, glm::vec3(-0.5f, 0.0f, -0.1f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::rotate(model, glm::radians(-rotRodIzq), glm::vec3(1.0f, 0.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		piernaDer.Draw(staticShader);
+		//piernaDer.Draw(staticShader);
 
 		//Pie Der
 		model = glm::translate(model, glm::vec3(0, -0.9f, -0.2f));
 		staticShader.setMat4("model", model);
-		botaDer.Draw(staticShader);
+		//botaDer.Draw(staticShader);
 
 		//Pierna Izq
 		model = glm::translate(tmp, glm::vec3(0.5f, 0.0f, -0.1f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		piernaIzq.Draw(staticShader);
+		//piernaIzq.Draw(staticShader);
 
 		//Pie Iz
 		model = glm::translate(model, glm::vec3(0, -0.9f, -0.2f));
 		staticShader.setMat4("model", model);
-		botaDer.Draw(staticShader);	//Izq trase
+		//botaDer.Draw(staticShader);	//Izq trase
 
 		//Brazo derecho
 		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
 		model = glm::translate(model, glm::vec3(-0.75f, 2.5f, 0));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		brazoDer.Draw(staticShader);
+		//brazoDer.Draw(staticShader);
 
 		//Brazo izquierdo
 		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
 		model = glm::translate(model, glm::vec3(0.75f, 2.5f, 0));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		staticShader.setMat4("model", model);
-		brazoIzq.Draw(staticShader);
+		//brazoIzq.Draw(staticShader);
 
 		//Cabeza
 		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0));
 		staticShader.setMat4("model", model);
-		cabeza.Draw(staticShader);
+		//cabeza.Draw(staticShader);
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Caja Transparente --- Siguiente Práctica
 		// -------------------------------------------------------------------------------------------------------------------------
