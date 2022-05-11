@@ -1,0 +1,33 @@
+﻿  Final.cpp
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1288,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1289,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1293,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1294,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1296,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1297,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_Final\Proyecto_Final\Final.cpp(1305,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRTD' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Generando código
+  1 of 1274 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    9 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB '' con 'glfw3.lib(context.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(vulkan.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(vulkan.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(window.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_init.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_joystick.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_monitor.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_time.obj) : warning LNK4099: no se encontró PDB '' con 'glfw3.lib(win32_time.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_thread.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_thread.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(wgl_context.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(egl_context.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(osmesa_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(osmesa_context.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Proyecto_Final.vcxproj -> D:\Documentos\EagleWarriorDemo\Proyecto_Final\Release\Proyecto_Final.exe
