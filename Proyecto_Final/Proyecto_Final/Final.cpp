@@ -4,7 +4,7 @@
 /*------------- Alumno:                     ---------------*/
 /*------------- No. Cuenta                  ---------------*/
 #include <Windows.h>
-
+#include <mmsystem.h>
 #include <glad/glad.h>
 #include <glfw3.h>	//main
 #include <stdlib.h>		
@@ -12,7 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp>	//camera y model
 #include <glm/gtc/type_ptr.hpp>
 #include <time.h>
-
+#include <thread>
 
 #define STB_IMAGE_IMPLEMENTATION
 #define SOLDIER_SIZE  1.45f
@@ -194,9 +194,14 @@ void getResolution()
 	SCR_HEIGHT = (mode->height) - 80;
 }
 
+void playSoundTrack() {
+	///////////////////////////////////////
+	///Sonido; Requiere de hilos
+	///////////////////////////////////////
+	PlaySound(TEXT("resources/audio/Soundtrack/DeadEye.wav"), NULL, SND_FILENAME);
+}
 
-int main()
-{
+int main(){
 	// glfw: initialize and configure
 	// ------------------------------
 	glfwInit();
@@ -249,8 +254,7 @@ int main()
 	Shader skyboxShader("Shaders/skybox.vs", "Shaders/skybox.fs");
 	Shader animShader("Shaders/anim.vs", "Shaders/anim.fs");
 
-	vector<std::string> faces
-	{
+	vector<std::string> faces{
 		"resources/skybox/right.jpg",
 		"resources/skybox/left.jpg",
 		"resources/skybox/top.jpg",
@@ -302,9 +306,10 @@ int main()
 	ModelAnim Soldado("resources/objects/Soldado/Marchar.dae");
 	Soldado.initShaders(animShader.ID);
 
+	std::thread soundtrack(&playSoundTrack);
+
 	//Inicialización de KeyFrames
-	for (int i = 0; i < MAX_FRAMES; i++)
-	{
+	for (int i = 0; i < MAX_FRAMES; i++){
 		KeyFrame[i].posX = 0;
 		KeyFrame[i].posY = 0;
 		KeyFrame[i].posZ = 0;
@@ -314,11 +319,12 @@ int main()
 
 	// draw in wireframe
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	
+	soundtrack.detach();
 
 	// render loop
 	// -----------
-	while (!glfwWindowShouldClose(window))
-	{
+	while (!glfwWindowShouldClose(window)){
 		skyboxShader.setInt("skybox", 0);
 		
 		// per-frame time logic
