@@ -2,7 +2,7 @@
 /* ------------- Proyecto Final Eagle Warrior -----------------*/
 /*------------------------- 2022-2 ----------------------------*/
 /*-------- Espino de Horta Joaquín Gustavo -315104271----------*/
-/*-------- Reyes González Agustín Óscar                --------*/
+/*-------- Reyes González Agustín Óscar  417095215 ------------*/
 #include <Windows.h>
 #include <mmsystem.h>
 #include <glad/glad.h>
