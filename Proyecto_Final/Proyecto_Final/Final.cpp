@@ -198,7 +198,12 @@ void playSoundTrack() {
 	///////////////////////////////////////
 	///Sonido; Requiere de hilos
 	///////////////////////////////////////
-	PlaySound(TEXT("resources/audio/Soundtrack/DeadEye.wav"), NULL, SND_FILENAME);
+	PlaySound(TEXT("resources/Audio/Soundtrack/Calm.wav"), NULL, SND_FILENAME);
+	PlaySound(TEXT("resources/Audio/Soundtrack/Control.wav"), NULL, SND_FILENAME);
+	PlaySound(TEXT("resources/Audio/Soundtrack/Anticipation.wav"), NULL, SND_FILENAME);
+	PlaySound(TEXT("resources/Audio/Soundtrack/Action1.wav"), NULL, SND_FILENAME);
+	PlaySound(TEXT("resources/Audio/Soundtrack/Action2.wav"), NULL, SND_FILENAME);
+	PlaySound(TEXT("resources/Audio/Soundtrack/Action3.wav"), NULL, SND_FILENAME);
 }
 
 int main(){
