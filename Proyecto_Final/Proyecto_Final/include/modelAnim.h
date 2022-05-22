@@ -81,7 +81,7 @@ public:
             meshes[i].Draw(shader);
     }
     
-private:
+
 
     /*  Functions   */
     // loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
@@ -133,7 +133,7 @@ private:
 		}
 		cout << endl;
     }
-
+	private:
 	void showNodeName(aiNode* node)
 	{
 		cout << node->mName.data << endl;

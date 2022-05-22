@@ -2,20 +2,22 @@
 D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
 D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1173,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1174,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1178,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1179,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1181,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1182,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1189,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(124,72): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(135,68): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1166,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1167,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1171,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1172,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1174,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1175,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Proyecto_Final\Final.cpp(1182,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 LINK : warning LNK4098: la biblioteca predeterminada'MSVCRTD' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
   Generando código
-  1 of 1308 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1367 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     10 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB '' con 'glfw3.lib(context.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'D:\Documentos\EagleWarriorDemo\Proyecto_CGeIHC\Proyecto_Final\Release\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración

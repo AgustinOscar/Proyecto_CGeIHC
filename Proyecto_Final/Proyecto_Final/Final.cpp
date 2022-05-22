@@ -30,6 +30,7 @@
 #include <model.h>
 #include <Skybox.h>
 #include <iostream>
+#include <vector>
 
 //#pragma comment(lib, "winmm.lib")
 
@@ -38,7 +39,6 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 //void my_input(GLFWwindow *window);
 void my_input(GLFWwindow* window, int key, int scancode, int action, int mods);
-void animate(void);
 
 // settings
 unsigned int SCR_WIDTH = 800;
@@ -64,56 +64,101 @@ glm::vec3 lightPosition(0.0f, 4.0f, -10.0f);
 glm::vec3 lightDirection(0.0f, -1.0f, -1.0f);
 
 //Keyframes (Manipulación y dibujo)
-float	carreta[4], patrol1[4], patrol2[4];
-float	incCarreta[4], incPatrol1[4], incPatrol2[4];
-
-#define MAX_FRAMES 25
-int i_max_steps = 120;
-int i_curr_steps = 0;
 typedef struct _frame {
-	float Comp[4];
+	float pos[4];
 }FRAME;
+typedef struct Rutina{
+	float pos[4];   //Posicionamiento
+	float inc[4];   //incrementos
+	std::vector<FRAME> frm;   //cuadros	
+	//FRAME frm[9];   //cuadros	
+	int	velocity;
+	int currentFrame;
+	int currentStep;
+	int	nFrames;
 
-FRAME CAR_KeyFrame[MAX_FRAMES], PRT1_KeyFrame[MAX_FRAMES], PRT2_KeyFrame[MAX_FRAMES];
-const int FrameIndex = MAX_FRAMES;
-bool play = false;
-int playIndex = 0;
+	bool loop;
+	bool active;
 
-void resetElements() {
-	for (int i = 0; i < 4; i++) {
-		carreta[i] = CAR_KeyFrame[0].Comp[i];
-		patrol1[i] = PRT1_KeyFrame[0].Comp[i];
-		patrol2[i] = PRT2_KeyFrame[0].Comp[i];
+	void resetPosition() {
+		for (int i = 0; i < 4; i++)
+				pos[i] = frm[0].pos[i];
+		currentFrame = 0;
+		currentStep = 0;
 	}
-}
-
-void interpolation() {
-	for (int i = 0; i < 4; i++) {
-		incCarreta[i] = (CAR_KeyFrame[playIndex + 1].Comp[i] - CAR_KeyFrame[playIndex].Comp[i]) / i_max_steps;
-		incPatrol1[i] = (PRT1_KeyFrame[playIndex + 1].Comp[i] - PRT1_KeyFrame[playIndex].Comp[i]) / i_max_steps;
-		incPatrol2[i] = (PRT2_KeyFrame[playIndex + 1].Comp[i] - PRT2_KeyFrame[playIndex].Comp[i]) / i_max_steps;
+	void interpolacion() {
+		for (int i = 0; i < 4; i++) 
+			inc[i] = (frm[currentFrame + 1].pos[i] - frm[currentFrame].pos[i]) / velocity;
 	}
-}
-
-void animate() {
-	if (play)
-		if (i_curr_steps >= i_max_steps){
-			playIndex++;
-			if (playIndex > FrameIndex - 2){
-				playIndex = 0;
-				play = false;
-			}else{
-				i_curr_steps = 0;
-				interpolation();
+	bool animar() {
+		if (active)
+			if (currentStep >= velocity) {
+				currentFrame++;
+				if (currentFrame > nFrames - 2){
+					currentFrame = 0;
+					active = false;
+				}else{
+					currentStep = 0;
+					interpolacion();
+				}
+				return true; //Envia un trigger al actualizar el frame
+			}else {
+				for (int i = 0; i < 4; i++)
+					pos[i] += inc[i];
+				currentStep++;
 			}
-		}else{
-			for (int i = 0; i < 4; i++) {
-				carreta[i] += incCarreta[i];
-				patrol1[i] += incPatrol1[i];
-				patrol2[i] += incPatrol2[i];
-			}
-			i_curr_steps++;
+		else if (loop) {
+			resetPosition();
+			interpolacion();
+			active = true;
 		}
+		return false;
+	}
+}RUTINA;
+//Animacion y desencadenadores
+RUTINA carromato, patrulla, condrack;
+int  trg[2];
+bool drawCarromato = true;
+
+void setKeyFrames(){
+	carromato.active = true; carromato.loop = false; carromato.velocity = 120.0f; carromato.nFrames = 8; carromato.frm.resize(8);
+	carromato.frm[0].pos[0] = -300.0f;  carromato.frm[0].pos[1] =  7.0f;  carromato.frm[0].pos[2] =  300.0f;  carromato.frm[0].pos[3] =  90.0f;
+	carromato.frm[1].pos[0] =  285.0f;  carromato.frm[1].pos[1] =  7.0f;  carromato.frm[1].pos[2] =  300.0f;  carromato.frm[1].pos[3] =  90.0f;
+	carromato.frm[2].pos[0] =  350.0f;  carromato.frm[2].pos[1] =  7.0f;  carromato.frm[2].pos[2] =  300.0f;  carromato.frm[2].pos[3] = 180.0f;
+	carromato.frm[3].pos[0] =  350.0f;  carromato.frm[3].pos[1] =  7.0f;  carromato.frm[3].pos[2] = -285.0f;  carromato.frm[3].pos[3] = 180.0f;
+	carromato.frm[4].pos[0] =  350.0f;  carromato.frm[4].pos[1] =  7.0f;  carromato.frm[4].pos[2] = -300.0f;  carromato.frm[4].pos[3] = 270.0f;
+	carromato.frm[5].pos[0] = -285.0f;  carromato.frm[5].pos[1] =  7.0f;  carromato.frm[5].pos[2] = -300.0f;  carromato.frm[5].pos[3] = 270.0f;
+	carromato.frm[6].pos[0] = -300.0f;  carromato.frm[6].pos[1] =  7.0f;  carromato.frm[6].pos[2] = -300.0f;  carromato.frm[6].pos[3] = 360.0f;
+	carromato.frm[7].pos[0] = -300.0f;  carromato.frm[7].pos[1] =  7.0f;  carromato.frm[7].pos[2] =  400.0f;  carromato.frm[7].pos[3] = 360.0f;
+	carromato.resetPosition(); carromato.interpolacion();
+
+	patrulla.active = true; patrulla.loop = true; patrulla.velocity = 120.0f; patrulla.nFrames = 9; patrulla.frm.resize(9);
+	patrulla.frm[0].pos[0] = -250.0f;  patrulla.frm[0].pos[1] = -5.0f;  patrulla.frm[0].pos[2] = -300.0f;  patrulla.frm[0].pos[3] = 90.0f;
+	patrulla.frm[1].pos[0] =  280.0f;  patrulla.frm[1].pos[1] = -5.0f;  patrulla.frm[1].pos[2] = -300.0f;  patrulla.frm[1].pos[3] = 90.0f;
+	patrulla.frm[2].pos[0] =  300.0f;  patrulla.frm[2].pos[1] = -5.0f;  patrulla.frm[2].pos[2] = -300.0f;  patrulla.frm[2].pos[3] =  0.0f;
+	patrulla.frm[3].pos[0] =  300.0f;  patrulla.frm[3].pos[1] = -5.0f;  patrulla.frm[3].pos[2] =  280.0f;  patrulla.frm[3].pos[3] =  0.0f;
+	patrulla.frm[4].pos[0] =  300.0f;  patrulla.frm[4].pos[1] = -5.0f;  patrulla.frm[4].pos[2] =  300.0f;  patrulla.frm[4].pos[3] = 180.0f;
+	patrulla.frm[5].pos[0] =  300.0f;  patrulla.frm[5].pos[1] = -5.0f;  patrulla.frm[5].pos[2] = -280.0f;  patrulla.frm[5].pos[3] = 180.0f;
+	patrulla.frm[6].pos[0] =  300.0f;  patrulla.frm[6].pos[1] = -5.0f;  patrulla.frm[6].pos[2] = -300.0f;  patrulla.frm[6].pos[3] = 270.0f;
+	patrulla.frm[7].pos[0] = -250.0f;  patrulla.frm[7].pos[1] = -5.0f;  patrulla.frm[7].pos[2] = -300.0f;  patrulla.frm[7].pos[3] = 270.0f;
+	patrulla.frm[8].pos[0] = -230.0f;  patrulla.frm[8].pos[1] = -5.0f;  patrulla.frm[8].pos[2] = -300.0f;  patrulla.frm[8].pos[3] = 450.0f;
+	patrulla.resetPosition(); patrulla.interpolacion();
+}
+void triggers() {
+	
+	if (carromato.animar()) {
+		switch (trg[0]) {
+			case 6:
+				drawCarromato = false;
+				trg[0] = 0;
+		}
+		trg[0]++;
+	}
+	if (patrulla.animar()) {
+		//switch (trg[1]) {
+		//}
+		//trg[1]++;
+	}
 }
 
 void getResolution() {
@@ -122,80 +167,28 @@ void getResolution() {
 	SCR_WIDTH = mode->width;
 	SCR_HEIGHT = (mode->height) - 80;
 }
-
-void playSoundTrack() {
-	///////////////////////////////////////
-	///Sonido; Requiere de hilos
-	///////////////////////////////////////
-	PlaySound(TEXT("resources/Audio/Soundtrack/Calm.wav"), NULL, SND_FILENAME);
-	PlaySound(TEXT("resources/Audio/Soundtrack/Control.wav"), NULL, SND_FILENAME);
-	PlaySound(TEXT("resources/Audio/Soundtrack/Anticipation.wav"), NULL, SND_FILENAME);
-	PlaySound(TEXT("resources/Audio/Soundtrack/Action1.wav"), NULL, SND_FILENAME);
-	PlaySound(TEXT("resources/Audio/Soundtrack/Action2.wav"), NULL, SND_FILENAME);
-	PlaySound(TEXT("resources/Audio/Soundtrack/Action3.wav"), NULL, SND_FILENAME);
+void playSoundTrack(int nOST) {
+	switch(nOST){
+		case 0:
+			PlaySound(TEXT("resources/Audio/Soundtrack/Calm.wav"), NULL, SND_FILENAME);
+			break;
+		case 1:
+			PlaySound(TEXT("resources/Audio/Soundtrack/Control.wav"), NULL, SND_FILENAME);
+			break;
+		case 2:
+			PlaySound(TEXT("resources/Audio/Soundtrack/Anticipation.wav"), NULL, SND_FILENAME);
+			break;
+		case 3:
+			PlaySound(TEXT("resources/Audio/Soundtrack/Action1.wav"), NULL, SND_FILENAME);
+			break;
+		case 4:
+			PlaySound(TEXT("resources/Audio/Soundtrack/Action2.wav"), NULL, SND_FILENAME);
+			break;
+		case 5:
+			PlaySound(TEXT("resources/Audio/Soundtrack/Action3.wav"), NULL, SND_FILENAME);
+	}
 }
 
-void setKeyFrames(){
-////Grupo_KeyFrame[nFrame].Comp[0] = X  Grupo_KeyFrame[nFrame].Comp[1] = Y Grupo_KeyFrame[nFrame].Comp[2] = Z   Grupo_KeyFrame[nFrame].Comp[3] = rotZ
-	CAR_KeyFrame[0].Comp[0] = -300.0f;  CAR_KeyFrame[0].Comp[1] =  7.0f;  CAR_KeyFrame[0].Comp[2] =  300.0f;  CAR_KeyFrame[0].Comp[3] = 90.0f;
-	CAR_KeyFrame[1].Comp[0] = -100.0f;  CAR_KeyFrame[1].Comp[1] =  7.0f;  CAR_KeyFrame[1].Comp[2] =  300.0f;  CAR_KeyFrame[1].Comp[3] = 90.0f;
-	CAR_KeyFrame[2].Comp[0] =    0.0f;  CAR_KeyFrame[2].Comp[1] =  7.0f;  CAR_KeyFrame[2].Comp[2] =  300.0f;  CAR_KeyFrame[2].Comp[3] = 90.0f;
-	CAR_KeyFrame[3].Comp[0] =  100.0f;  CAR_KeyFrame[3].Comp[1] =  7.0f;  CAR_KeyFrame[3].Comp[2] =  300.0f;  CAR_KeyFrame[3].Comp[3] = 90.0f;
-	CAR_KeyFrame[4].Comp[0] =  300.0f;  CAR_KeyFrame[4].Comp[1] =  7.0f;  CAR_KeyFrame[4].Comp[2] =  300.0f;  CAR_KeyFrame[4].Comp[3] = 90.0f;
-	CAR_KeyFrame[5].Comp[0] =  350.0f;  CAR_KeyFrame[5].Comp[1] =  7.0f;  CAR_KeyFrame[5].Comp[2] =  300.0f;  CAR_KeyFrame[5].Comp[3] =  180.0f;
-	CAR_KeyFrame[6].Comp[0] =  350.0f;  CAR_KeyFrame[6].Comp[1] =   7.0f;  CAR_KeyFrame[6].Comp[2] = 300.0f;   CAR_KeyFrame[6].Comp[3] =  180.0f;
-	CAR_KeyFrame[7].Comp[0] =  350.0f;  CAR_KeyFrame[7].Comp[1] =  7.0f;  CAR_KeyFrame[7].Comp[2] = 100.0f;   CAR_KeyFrame[7].Comp[3] = 180.0f;
-	CAR_KeyFrame[8].Comp[0] =  350.0f;  CAR_KeyFrame[8].Comp[1] =   7.0f;  CAR_KeyFrame[8].Comp[2] =  0.0f;   CAR_KeyFrame[8].Comp[3] = 180.0f;
-	CAR_KeyFrame[9].Comp[0] =  350.0f;  CAR_KeyFrame[9].Comp[1] =   7.0f;  CAR_KeyFrame[9].Comp[2] = -100.0f;   CAR_KeyFrame[9].Comp[3] = 180.0f;
-	CAR_KeyFrame[10].Comp[0] = 350.0f;  CAR_KeyFrame[10].Comp[1] =  7.0f;  CAR_KeyFrame[10].Comp[2] =-300.0f;  CAR_KeyFrame[10].Comp[3] = 180.0f;
-	CAR_KeyFrame[11].Comp[0] = 350.0f;  CAR_KeyFrame[11].Comp[1] =  7.0f;  CAR_KeyFrame[11].Comp[2] =-300.0f;  CAR_KeyFrame[11].Comp[3] = 270.0f;
-	CAR_KeyFrame[12].Comp[0] = 300.0f;  CAR_KeyFrame[12].Comp[1] =  7.0f;  CAR_KeyFrame[12].Comp[2] = -300.0f;  CAR_KeyFrame[12].Comp[3] = 270.0f;
-	CAR_KeyFrame[13].Comp[0] = 100.0f;  CAR_KeyFrame[13].Comp[1] = 7.0f;  CAR_KeyFrame[13].Comp[2] = -300.0f;  CAR_KeyFrame[13].Comp[3] = 270.0f;
-	CAR_KeyFrame[14].Comp[0] =   0.0f;  CAR_KeyFrame[14].Comp[1] = 7.0f;  CAR_KeyFrame[14].Comp[2] = -300.0f;  CAR_KeyFrame[14].Comp[3] = 270.0f;
-	CAR_KeyFrame[15].Comp[0] =-100.0f;  CAR_KeyFrame[15].Comp[1] = 7.0f;  CAR_KeyFrame[15].Comp[2] = -300.0f;  CAR_KeyFrame[15].Comp[3] = 270.0f;
-	CAR_KeyFrame[16].Comp[0] =-300.0f;  CAR_KeyFrame[16].Comp[1] =  7.0f;  CAR_KeyFrame[16].Comp[2] = -300.0f;  CAR_KeyFrame[16].Comp[3] = 270.0f;
-	CAR_KeyFrame[17].Comp[0] =-300.0f;  CAR_KeyFrame[17].Comp[1] =  7.0f;  CAR_KeyFrame[17].Comp[2] = -300.0f;  CAR_KeyFrame[17].Comp[3] = 360.0f;
-	CAR_KeyFrame[18].Comp[0] = -300.0f;  CAR_KeyFrame[18].Comp[1] =  7.0f;  CAR_KeyFrame[18].Comp[2] = -300.0f;  CAR_KeyFrame[18].Comp[3] =360.0f;
-	CAR_KeyFrame[19].Comp[0] = -300.0f;  CAR_KeyFrame[19].Comp[1] = 7.0f;  CAR_KeyFrame[19].Comp[2] = -100.0f;  CAR_KeyFrame[19].Comp[3] = 360.0f;
-	CAR_KeyFrame[20].Comp[0] = -300.0f;  CAR_KeyFrame[20].Comp[1] = 7.0f;  CAR_KeyFrame[20].Comp[2] =  -50.0f;  CAR_KeyFrame[20].Comp[3] = 360.0f;
-	CAR_KeyFrame[21].Comp[0] = -300.0f;  CAR_KeyFrame[21].Comp[1] = 7.0f;  CAR_KeyFrame[21].Comp[2] =   50.0f;  CAR_KeyFrame[21].Comp[3] = 360.0f;
-	CAR_KeyFrame[22].Comp[0] = -300.0f;  CAR_KeyFrame[22].Comp[1] = 7.0f;  CAR_KeyFrame[22].Comp[2] =  100.0f;  CAR_KeyFrame[22].Comp[3] = 360.0f;
-	CAR_KeyFrame[23].Comp[0] = -300.0f;  CAR_KeyFrame[23].Comp[1] =  7.0f;  CAR_KeyFrame[23].Comp[2] =  300.0f;  CAR_KeyFrame[23].Comp[3] = 360.0f;
-	CAR_KeyFrame[24].Comp[0] = -300.0f;  CAR_KeyFrame[24].Comp[1] =  7.0f;  CAR_KeyFrame[24].Comp[2] =  300.0f;  CAR_KeyFrame[24].Comp[3] = 450.0f;
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	PRT1_KeyFrame[0].Comp[0] = -250.0f;  PRT1_KeyFrame[0].Comp[1] = -5.0f;  PRT1_KeyFrame[0].Comp[2] = -300.0f;  PRT1_KeyFrame[0].Comp[3] = 90.0f;
-	PRT1_KeyFrame[1].Comp[0] = -150.0f;  PRT1_KeyFrame[1].Comp[1] = -5.0f;  PRT1_KeyFrame[1].Comp[2] = -300.0f;  PRT1_KeyFrame[1].Comp[3] = 90.0f;
-	PRT1_KeyFrame[2].Comp[0] =    0.0f;  PRT1_KeyFrame[2].Comp[1] = -5.0f;  PRT1_KeyFrame[2].Comp[2] = -300.0f;  PRT1_KeyFrame[2].Comp[3] = 90.0f;
-	PRT1_KeyFrame[3].Comp[0] =  150.0f;  PRT1_KeyFrame[3].Comp[1] = -5.0f;  PRT1_KeyFrame[3].Comp[2] = -300.0f;  PRT1_KeyFrame[3].Comp[3] = 90.0f;
-	PRT1_KeyFrame[4].Comp[0] =  300.0f;  PRT1_KeyFrame[4].Comp[1] = -5.0f;  PRT1_KeyFrame[4].Comp[2] = -300.0f;  PRT1_KeyFrame[4].Comp[3] = 90.0f;
-	PRT1_KeyFrame[5].Comp[0] =  300.0f;  PRT1_KeyFrame[5].Comp[1] = -5.0f;  PRT1_KeyFrame[5].Comp[2] = -300.0f;  PRT1_KeyFrame[5].Comp[3] =  0.0f;
-	PRT1_KeyFrame[6].Comp[0] =  300.0f;  PRT1_KeyFrame[6].Comp[1] = -5.0f;  PRT1_KeyFrame[6].Comp[2] = -200.0f;  PRT1_KeyFrame[6].Comp[3] =  0.0f;
-	PRT1_KeyFrame[7].Comp[0] =  300.0f;  PRT1_KeyFrame[7].Comp[1] = -5.0f;  PRT1_KeyFrame[7].Comp[2] = -100.0f;  PRT1_KeyFrame[7].Comp[3] =  0.0f;
-	PRT1_KeyFrame[8].Comp[0] =  300.0f;  PRT1_KeyFrame[8].Comp[1] = -5.0f;  PRT1_KeyFrame[8].Comp[2] =    0.0f;  PRT1_KeyFrame[8].Comp[3] =  0.0f;
-	PRT1_KeyFrame[9].Comp[0] =  300.0f;  PRT1_KeyFrame[9].Comp[1] = -5.0f;  PRT1_KeyFrame[9].Comp[2] =   100.0f;  PRT1_KeyFrame[9].Comp[3] = 0.0f;
-	PRT1_KeyFrame[10].Comp[0] = 300.0f;  PRT1_KeyFrame[10].Comp[1] = -5.0f; PRT1_KeyFrame[10].Comp[2] =  200.0f; PRT1_KeyFrame[10].Comp[3] = 0.0f;
-	PRT1_KeyFrame[11].Comp[0] = 300.0f;  PRT1_KeyFrame[11].Comp[1] = -5.0f; PRT1_KeyFrame[11].Comp[2] =  300.0f; PRT1_KeyFrame[11].Comp[3] = 0.0f;
-	PRT1_KeyFrame[12].Comp[0] = 300.0f;  PRT1_KeyFrame[12].Comp[1] = -5.0f; PRT1_KeyFrame[12].Comp[2] =  300.0f; PRT1_KeyFrame[12].Comp[3] = 180.0f;
-	PRT1_KeyFrame[13].Comp[0] = 300.0f;  PRT1_KeyFrame[13].Comp[1] = -5.0f; PRT1_KeyFrame[13].Comp[2] =  200.0f; PRT1_KeyFrame[13].Comp[3] = 180.0f;
-	PRT1_KeyFrame[14].Comp[0] = 300.0f;  PRT1_KeyFrame[14].Comp[1] = -5.0f; PRT1_KeyFrame[14].Comp[2] =  100.0f; PRT1_KeyFrame[14].Comp[3] = 180.0f;
-	PRT1_KeyFrame[15].Comp[0] = 300.0f;  PRT1_KeyFrame[15].Comp[1] = -5.0f; PRT1_KeyFrame[15].Comp[2] =    0.0f; PRT1_KeyFrame[15].Comp[3] = 180.0f;
-	PRT1_KeyFrame[16].Comp[0] = 300.0f;  PRT1_KeyFrame[16].Comp[1] = -5.0f; PRT1_KeyFrame[16].Comp[2] = -100.0f; PRT1_KeyFrame[16].Comp[3] = 180.0f;
-	PRT1_KeyFrame[17].Comp[0] = 300.0f;  PRT1_KeyFrame[17].Comp[1] = -5.0f; PRT1_KeyFrame[17].Comp[2] = -200.0f; PRT1_KeyFrame[17].Comp[3] = 180.0f;
-	PRT1_KeyFrame[18].Comp[0] = 300.0f;  PRT1_KeyFrame[18].Comp[1] = -5.0f; PRT1_KeyFrame[18].Comp[2] = -300.0f; PRT1_KeyFrame[18].Comp[3] = 180.0f;
-	PRT1_KeyFrame[19].Comp[0] = 300.0f;  PRT1_KeyFrame[19].Comp[1] = -5.0f; PRT1_KeyFrame[19].Comp[2] = -300.0f; PRT1_KeyFrame[19].Comp[3] = 270.0f;
-	PRT1_KeyFrame[20].Comp[0] = 150.0f;  PRT1_KeyFrame[20].Comp[1] = -5.0f;  PRT1_KeyFrame[20].Comp[2] = -300.0f;  PRT1_KeyFrame[20].Comp[3] = 270.0f;
-	PRT1_KeyFrame[21].Comp[0] =   0.0f;  PRT1_KeyFrame[21].Comp[1] = -5.0f;  PRT1_KeyFrame[21].Comp[2] = -300.0f;  PRT1_KeyFrame[21].Comp[3] = 270.0f;
-	PRT1_KeyFrame[22].Comp[0] =-150.0f;  PRT1_KeyFrame[22].Comp[1] = -5.0f;  PRT1_KeyFrame[22].Comp[2] = -300.0f;  PRT1_KeyFrame[22].Comp[3] = 270.0f;
-	PRT1_KeyFrame[23].Comp[0] =-250.0f;  PRT1_KeyFrame[23].Comp[1] = -5.0f;  PRT1_KeyFrame[23].Comp[2] = -300.0f;  PRT1_KeyFrame[23].Comp[3] = 270.0f;
-	PRT1_KeyFrame[24].Comp[0] =-250.0f;  PRT1_KeyFrame[24].Comp[1] = -5.0f;  PRT1_KeyFrame[24].Comp[2] = -300.0f;  PRT1_KeyFrame[24].Comp[3] = 450.0f;
-}
-void resetAnimation() {
-	play = true;
-	playIndex = 0;
-	i_curr_steps = 0;
-	resetElements();
-	interpolation();
-}
 int main() {
 	glfwInit();
 
@@ -205,7 +198,7 @@ int main() {
 	monitors = glfwGetPrimaryMonitor();
 	getResolution();
 
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "CGeIHC", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "CGeIHC_Eagle_Warrior", NULL, NULL);
 	if (window == NULL){
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -279,28 +272,26 @@ int main() {
 	Model Carretilla("resources/objects/Carretilla/Carretilla.obj");
 	Model Rueda("resources/objects/Carretilla/Ruedas.obj");
 
-	ModelAnim Condrack("resources/objects/Condrack/Condrack_Escena1.dae");
+	/*ModelAnim Condrack("resources/objects/Condrack/Condrack_Escena1.dae");
 	Condrack.initShaders(animShader.ID);
+	Condrack.loadModel("resources/objects/Condrack/Condrack_Escena1_1.dae");*/
+
 	ModelAnim Caballo("resources/objects/Carretilla/Caballo.dae");
 	Caballo.initShaders(animShader.ID);
 	ModelAnim Soldado("resources/objects/Soldado/Marchar.dae");
 	Soldado.initShaders(animShader.ID);
 
-	std::thread soundtrack(&playSoundTrack);
+	std::thread soundtrack(&playSoundTrack,0);
 
 	//Reproduccion del Soundtrack
 	soundtrack.detach();
 	setKeyFrames();
-	resetAnimation();
 	// render loop
 	// -----------
 	while (!glfwWindowShouldClose(window)){
 		skyboxShader.setInt("skybox", 0);
 		lastFrame = SDL_GetTicks();
 
-		animate();
-		if (!play)
-			resetAnimation();
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -341,7 +332,7 @@ int main() {
 		glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
 		glm::vec3 ambientColor = diffuseColor * glm::vec3(0.75f);
 
-
+		triggers();
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Personajes Con Animacion
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -364,48 +355,48 @@ int main() {
 		animShader.setMat4("model", model);
 		Condrack.Draw(animShader);*/
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3( patrol1[0], patrol1[1], patrol1[2]));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3( patrulla.pos[0], patrulla.pos[1], patrulla.pos[2]));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(patrol1[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(patrulla.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
 		animShader.setMat4("model", model);
 		Soldado.Draw(animShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrol1[0] + 13.0f, patrol1[1], patrol1[2]));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrulla.pos[0] + 13.0f, patrulla.pos[1], patrulla.pos[2]));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(patrol1[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(patrulla.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
 		animShader.setMat4("model", model);
 		Soldado.Draw(animShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrol1[0] - 13.0f, patrol1[1], patrol1[2]));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrulla.pos[0] - 13.0f, patrulla.pos[1], patrulla.pos[2]));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(patrol1[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(patrulla.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
 		animShader.setMat4("model", model);
 		Soldado.Draw(animShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrol1[0], patrol1[1], patrol1[2] - 15.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrulla.pos[0], patrulla.pos[1], patrulla.pos[2] - 15.0f));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(patrol1[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(patrulla.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
 		animShader.setMat4("model", model);
 		Soldado.Draw(animShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrol1[0], patrol1[1], patrol1[2] + 15.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrulla.pos[0], patrulla.pos[1], patrulla.pos[2] + 15.0f));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(patrol1[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(patrulla.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
 		animShader.setMat4("model", model);
 		Soldado.Draw(animShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(carreta[0], carreta[1] - 7.0f, carreta[2]));
-		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(carreta[3]), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(2.0f));
-		animShader.setMat4("model", model);
-		Caballo.Draw(animShader);
-
+		if (drawCarromato) {
+			model = glm::translate(glm::mat4(1.0f), glm::vec3(carromato.pos[0], carromato.pos[1] - 7.0f, carromato.pos[2]));
+			model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+			model = glm::rotate(model, glm::radians(carromato.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+			model = glm::scale(model, glm::vec3(2.0f));
+			animShader.setMat4("model", model);
+			Caballo.Draw(animShader);
+		}
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Escenario
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -415,17 +406,19 @@ int main() {
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carreta
 		// -------------------------------------------------------------------------------------------------------------------------
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(0, 6.5f, -3.0f));
-		staticShader.setMat4("model", model);
-		Carretilla.Draw(staticShader);
-		model = glm::translate(model, glm::vec3(6.25f,  -2.9f, -11.0f));
-		staticShader.setMat4("model", model);
-		Rueda.Draw(staticShader);
-		model = glm::translate(model, glm::vec3(-12.5f,  0.0f,  0.0f));
-		model = glm::scale(model, glm::vec3(-1.0f));
-		staticShader.setMat4("model", model);
-		Rueda.Draw(staticShader);
+		if (drawCarromato) {
+			model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+			model = glm::translate(model, glm::vec3(0, 6.5f, -3.0f));
+			staticShader.setMat4("model", model);
+			Carretilla.Draw(staticShader);
+			model = glm::translate(model, glm::vec3(6.25f, -2.9f, -11.0f));
+			staticShader.setMat4("model", model);
+			Rueda.Draw(staticShader);
+			model = glm::translate(model, glm::vec3(-12.5f, 0.0f, 0.0f));
+			model = glm::scale(model, glm::vec3(-1.0f));
+			staticShader.setMat4("model", model);
+			Rueda.Draw(staticShader);
+		}
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Carreta Fin
 		// -------------------------------------------------------------------------------------------------------------------------
