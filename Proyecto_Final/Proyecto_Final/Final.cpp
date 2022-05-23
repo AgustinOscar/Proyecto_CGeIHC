@@ -121,7 +121,7 @@ int  trg[2];
 bool drawCarromato = true;
 
 void setKeyFrames(){
-	carromato.active = true; carromato.loop = false; carromato.velocity = 120.0f; carromato.nFrames = 8; carromato.frm.resize(8);
+	carromato.active = true; carromato.loop = false; carromato.velocity = 300.0f; carromato.nFrames = 8; carromato.frm.resize(8);
 	carromato.frm[0].pos[0] = -300.0f;  carromato.frm[0].pos[1] =  7.0f;  carromato.frm[0].pos[2] =  300.0f;  carromato.frm[0].pos[3] =  90.0f;
 	carromato.frm[1].pos[0] =  285.0f;  carromato.frm[1].pos[1] =  7.0f;  carromato.frm[1].pos[2] =  300.0f;  carromato.frm[1].pos[3] =  90.0f;
 	carromato.frm[2].pos[0] =  350.0f;  carromato.frm[2].pos[1] =  7.0f;  carromato.frm[2].pos[2] =  300.0f;  carromato.frm[2].pos[3] = 180.0f;
@@ -132,7 +132,7 @@ void setKeyFrames(){
 	carromato.frm[7].pos[0] = -300.0f;  carromato.frm[7].pos[1] =  7.0f;  carromato.frm[7].pos[2] =  400.0f;  carromato.frm[7].pos[3] = 360.0f;
 	carromato.resetPosition(); carromato.interpolacion();
 
-	patrulla.active = true; patrulla.loop = true; patrulla.velocity = 120.0f; patrulla.nFrames = 9; patrulla.frm.resize(9);
+	patrulla.active = true; patrulla.loop = true; patrulla.velocity = 400.0f; patrulla.nFrames = 9; patrulla.frm.resize(9);
 	patrulla.frm[0].pos[0] = -250.0f;  patrulla.frm[0].pos[1] = -5.0f;  patrulla.frm[0].pos[2] = -300.0f;  patrulla.frm[0].pos[3] = 90.0f;
 	patrulla.frm[1].pos[0] =  280.0f;  patrulla.frm[1].pos[1] = -5.0f;  patrulla.frm[1].pos[2] = -300.0f;  patrulla.frm[1].pos[3] = 90.0f;
 	patrulla.frm[2].pos[0] =  300.0f;  patrulla.frm[2].pos[1] = -5.0f;  patrulla.frm[2].pos[2] = -300.0f;  patrulla.frm[2].pos[3] =  0.0f;
@@ -145,7 +145,6 @@ void setKeyFrames(){
 	patrulla.resetPosition(); patrulla.interpolacion();
 }
 void triggers() {
-	
 	if (carromato.animar()) {
 		switch (trg[0]) {
 			case 6:
