@@ -116,7 +116,7 @@ typedef struct Rutina{
 	}
 }RUTINA;
 //Animacion y desencadenadores
-RUTINA carromato, patrulla, condrack, sol1, sol2, sol3, sol4;
+RUTINA carromato, patrulla, condrack, sol1, sol2, sol3, sol4, dragM, dragH;
 int  trg[2];
 bool drawCarromato = true;
 
@@ -148,6 +148,14 @@ void setKeyFrames(){
 	condrack.frm[0].pos[0] = 530.0f;  condrack.frm[0].pos[1] = 65.0f;  condrack.frm[0].pos[2] = 93.0f;  condrack.frm[0].pos[3] = 90.0f;
 	condrack.frm[1].pos[0] = 530.0f;  condrack.frm[1].pos[1] = 65.0f;  condrack.frm[1].pos[2] = 93.0f;  condrack.frm[1].pos[3] = 90.0f;
 	condrack.resetPosition(); condrack.interpolacion();
+
+	//dragH.active = false; dragH.loop = false; dragH.velocity = 400.0f; dragH.nFrames = 1; dragH.frm.resize(1);
+	//dragH.frm[0].pos[0] = -530.0f;  dragH.frm[0].pos[1] = 135.0f;  dragH.frm[0].pos[2] = 93.0f;  dragH.frm[0].pos[3] = 90.0f;
+	//dragH.resetPosition(); dragH.interpolacion();
+
+	dragM.active = false; dragM.loop = false; dragM.velocity = 400.0f; dragM.nFrames = 1; dragM.frm.resize(1);
+	dragM.frm[0].pos[0] = 0.0f;  dragM.frm[0].pos[1] = -5.0f;  dragM.frm[0].pos[2] = 200.0f;  dragM.frm[0].pos[3] = 90.0f;
+	dragM.resetPosition(); dragM.interpolacion();
 }
 void triggers() {
 	if (carromato.animar()) {
@@ -287,10 +295,12 @@ int main() {
 	Caballo.initShaders(animShader.ID);
 	ModelAnim Soldado("resources/objects/Soldado/Marchar.dae");
 	Soldado.initShaders(animShader.ID);
-	/*ModelAnim Dragon_Medio("resources/objects/MidDragon/Raptar.dae");
-	Soldado.initShaders(animShader.ID);
-	ModelAnim Dragon_Pesado("resources/objects/HeavyDragon/Volar.dae");
-	Soldado.initShaders(animShader.ID);*/
+
+	ModelAnim Dragon_Medio("resources/objects/MidDragon/Raptar.dae");
+	Dragon_Medio.initShaders(animShader.ID);
+	//ModelAnim Dragon_Pesado("resources/objects/HeavyDragon/Volar.dae");
+	//Dragon_Pesado.initShaders(animShader.ID);
+
 	std::thread soundtrack(&playSoundTrack,0);
 
 	//Reproduccion del Soundtrack
@@ -366,7 +376,21 @@ int main() {
 		animShader.setMat4("model", model);
 		Condrack.Draw(animShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3( patrulla.pos[0], patrulla.pos[1], patrulla.pos[2]));
+		//model = glm::translate(glm::mat4(1.0f), glm::vec3( dragH.pos[0], dragH.pos[1], dragH.pos[2]));
+		//model = glm::scale(model, glm::vec3(5.0f));
+		//model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(dragH.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		//animShader.setMat4("model", model);
+		//Dragon_Pesado.Draw(animShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(dragM.pos[0], dragM.pos[1], dragM.pos[2]));
+		model = glm::scale(model, glm::vec3(4.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(dragM.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
+		animShader.setMat4("model", model);
+		Dragon_Medio.Draw(animShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(patrulla.pos[0], patrulla.pos[1], patrulla.pos[2]));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(patrulla.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
@@ -715,13 +739,13 @@ int main() {
 		staticShader.setMat4("model", model);
 		casa1.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-500.0f, 0.0f, 100.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-500.0f, -5.0f, 100.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(9.5f));
 		staticShader.setMat4("model", model);
 		casa2.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(500.0f, 0.0f, -100.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(500.0f, -5.0f, -100.0f));
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(9.5f));
 		staticShader.setMat4("model", model);
