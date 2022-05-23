@@ -116,7 +116,7 @@ typedef struct Rutina{
 	}
 }RUTINA;
 //Animacion y desencadenadores
-RUTINA carromato, patrulla, condrack;
+RUTINA carromato, patrulla, condrack, sol1, sol2, sol3, sol4;
 int  trg[2];
 bool drawCarromato = true;
 
@@ -143,6 +143,11 @@ void setKeyFrames(){
 	patrulla.frm[7].pos[0] = -250.0f;  patrulla.frm[7].pos[1] = -5.0f;  patrulla.frm[7].pos[2] = -300.0f;  patrulla.frm[7].pos[3] = 270.0f;
 	patrulla.frm[8].pos[0] = -230.0f;  patrulla.frm[8].pos[1] = -5.0f;  patrulla.frm[8].pos[2] = -300.0f;  patrulla.frm[8].pos[3] = 450.0f;
 	patrulla.resetPosition(); patrulla.interpolacion();
+
+	condrack.active = false; condrack.loop = false; condrack.velocity = 400.0f; condrack.nFrames = 2; condrack.frm.resize(2);
+	condrack.frm[0].pos[0] = 530.0f;  condrack.frm[0].pos[1] = 65.0f;  condrack.frm[0].pos[2] = 93.0f;  condrack.frm[0].pos[3] = 90.0f;
+	condrack.frm[1].pos[0] = 530.0f;  condrack.frm[1].pos[1] = 65.0f;  condrack.frm[1].pos[2] = 93.0f;  condrack.frm[1].pos[3] = 90.0f;
+	condrack.resetPosition(); condrack.interpolacion();
 }
 void triggers() {
 	if (carromato.animar()) {
@@ -154,6 +159,11 @@ void triggers() {
 		trg[0]++;
 	}
 	if (patrulla.animar()) {
+		//switch (trg[1]) {
+		//}
+		//trg[1]++;
+	}
+	if (condrack.animar()) {
 		//switch (trg[1]) {
 		//}
 		//trg[1]++;
@@ -271,15 +281,16 @@ int main() {
 	Model Carretilla("resources/objects/Carretilla/Carretilla.obj");
 	Model Rueda("resources/objects/Carretilla/Ruedas.obj");
 
-	/*ModelAnim Condrack("resources/objects/Condrack/Condrack_Escena1.dae");
+	ModelAnim Condrack("resources/objects/Condrack/Vigilar_Techo.dae");
 	Condrack.initShaders(animShader.ID);
-	Condrack.loadModel("resources/objects/Condrack/Condrack_Escena1_1.dae");*/
-
 	ModelAnim Caballo("resources/objects/Carretilla/Caballo.dae");
 	Caballo.initShaders(animShader.ID);
 	ModelAnim Soldado("resources/objects/Soldado/Marchar.dae");
 	Soldado.initShaders(animShader.ID);
-
+	/*ModelAnim Dragon_Medio("resources/objects/MidDragon/Raptar.dae");
+	Soldado.initShaders(animShader.ID);
+	ModelAnim Dragon_Pesado("resources/objects/HeavyDragon/Volar.dae");
+	Soldado.initShaders(animShader.ID);*/
 	std::thread soundtrack(&playSoundTrack,0);
 
 	//Reproduccion del Soundtrack
@@ -348,11 +359,12 @@ int main() {
 		animShader.setVec3("light.direction", lightDirection);
 		animShader.setVec3("viewPos", camera.Position);
 
-		/*model = glm::translate(glm::mat4(1.0f), glm::vec3(200.0f, -5.0f, 300.0f));
-		model = glm::scale(model, glm::vec3(2.3f));
-		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(condrack.pos[0], condrack.pos[1], condrack.pos[2]));
+		model = glm::scale(model, glm::vec3(-2.3f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(condrack.pos[3]), glm::vec3(0.0f, 0.0f, 1.0f));
 		animShader.setMat4("model", model);
-		Condrack.Draw(animShader);*/
+		Condrack.Draw(animShader);
 
 		model = glm::translate(glm::mat4(1.0f), glm::vec3( patrulla.pos[0], patrulla.pos[1], patrulla.pos[2]));
 		model = glm::scale(model, glm::vec3(SOLDIER_SIZE));
